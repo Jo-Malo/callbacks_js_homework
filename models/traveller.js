@@ -28,18 +28,22 @@ Traveller.prototype.getJourneysByTransport = function (transport) {
 
 Traveller.prototype.getJourneysByMinDistance = function (minDistance) {
   return this.journeys.filter((journey) => {
-    return journey.distance >= minDistance;
+    return journey.distance > minDistance;
   });
 };
 
 Traveller.prototype.calculateTotalDistanceTravelled = function () {
   return this.journeys.reduce((total, journey) => {
-    return total += journey.distance;
+    return total + journey.distance;
   }, 0);
 };
+// 0 is initial value for accumulator
 
 Traveller.prototype.getUniqueModesOfTransport = function () {
-}
+  return this.getModesOfTransport().filter((transport, index, array) => {
+    return array.indexOf(transport) === index;
+  });
+};
 
 
 module.exports = Traveller;
